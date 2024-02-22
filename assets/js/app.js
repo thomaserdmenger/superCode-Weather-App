@@ -11,7 +11,7 @@ const dateDayNumber = dateToday.getDate()
 const dateYear = dateToday.getFullYear()
 const dateHours = dateToday.getHours()
 const dateMinutes = dateToday.getMinutes()
-const form = document.querySelector('form')
+const inputField = document.querySelector('input[type="text"]')
 
 // Event Handler
 const getUserData = (e) => {
@@ -35,6 +35,7 @@ const getUserData = (e) => {
 // ! Render Options Menu
 const renderMenu = (cities) => {
   const menuContainer = document.querySelector('#city-options')
+  document.querySelector('select').innerHTML = ''
   cities.forEach((city) => {
     const optionEl = document.createElement('option')
 
@@ -108,4 +109,4 @@ const renderWeatherData = (data, name) => {
 }
 
 // Event Listener
-form.addEventListener('submit', getUserData)
+inputField.addEventListener('input', getUserData)
