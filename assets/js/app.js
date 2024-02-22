@@ -57,13 +57,15 @@ const renderMenu = (cities) => {
 }
 
 // Fetch Data from API
-const fetchWeatherData = (lat, lon) => {
+const fetchWeatherData = (lat = 37.334606, lon = -122.009102) => {
   fetch(
     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${KEY}&units=metric&lang=de`
   )
     .then((res) => res.json())
     .then((data) => renderWeatherData(data))
 }
+
+fetchWeatherData()
 
 // Render Data
 const renderWeatherData = (data) => {
