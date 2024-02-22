@@ -60,3 +60,25 @@ html {
   flex-direction: column;
   align-items: center;
 }
+
+/* ! Form */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-block-start: 2rem;
+}
+
+form select {
+  width: 70%;
+}
+
+#city-options {
+  /* display: none; */
+  display: block;
+}
+
+#city-options.show {
+  display: flex;
+  flex-direction: column;
+}
