@@ -4,9 +4,6 @@ const currentWeatherContainer = document.querySelector('.current-weather')
 
 // Declare Variables
 const KEY = 'e1678d75ce4af9fec1178e60c5f88016'
-const LAT = 52.520008
-const LONG = 13.404954
-const API = `https://api.openweathermap.org/data/2.5/weather?lat=${LAT}&lon=${LONG}&appid=${KEY}&units=metric&lang=de`
 const dateToday = new Date()
 const dateDay = dateToday.toLocaleString('default', { weekday: 'long' })
 const dateMonth = dateToday.toLocaleString('default', { month: 'long' })
@@ -14,16 +11,64 @@ const dateDayNumber = dateToday.getDate()
 const dateYear = dateToday.getFullYear()
 const dateHours = dateToday.getHours()
 const dateMinutes = dateToday.getMinutes()
+const form = document.querySelector('form')
+
+// Event Handler
+const getUserData = (e) => {
+  e.preventDefault()
+  // Get User Input
+  const userInputVal = document
+    .querySelector('input[type="text"]')
+    .value.toLowerCase()
+
+  // Error Handling
+  if (userInputVal.length === 0) return
+
+  // Fetch City from API
+  fetch(
+    `http://api.openweathermap.org/geo/1.0/direct?q=${userInputVal}&limit=10&appid=${KEY}`
+  )
+    .then((res) => res.json())
+    .then((cities) => renderMenu(cities))
+}
+
+// ! Render Options Menu
+const renderMenu = (cities) => {
+  const menuContainer = document.querySelector('#city-options')
+  cities.forEach((city) => {
+    const optionEl = document.createElement('option')
+
+    optionEl.textContent = `${city.name} ${city.state ? '|' : ''} ${
+      city.state ? city.state : ''
+    } | ${city.country}`
+
+    menuContainer.classList.add('show')
+    menuContainer.appendChild(optionEl)
+
+    // Event Handler
+    const getLatLong = () => {
+      const { lat, lon } = city
+      fetchWeatherData(lat, lon)
+    }
+
+    // Event Listener
+    optionEl.addEventListener('click', getLatLong)
+  })
+}
 
 // Fetch Data from API
-fetch(API)
-  .then((res) => res.json())
-  .then((data) => renderData(data))
+const fetchWeatherData = (lat = 37.334606, lon = -122.009102) => {
+  fetch(
+    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${KEY}&units=metric&lang=de`
+  )
+    .then((res) => res.json())
+    .then((data) => renderWeatherData(data))
+}
+
+fetchWeatherData()
 
 // Render Data
-const renderData = (data) => {
-  console.log(data)
-
+const renderWeatherData = (data) => {
   const dataToday = `
     <p class="para">${data.weather[0].description}</p>
     <p class="temp">${Math.round(data.main.temp)}°C</p>
@@ -38,7 +83,7 @@ const renderData = (data) => {
     <div class="more-infos">
         <div>
             <p>${data.main.humidity}%</p>
-            <p>Luftfeuchte</p>
+            <p>Luft</p>
         </div>
         <div>
             <p>${Math.round(data.wind.speed * 3.6)} km/h</p>
@@ -53,3 +98,6 @@ const renderData = (data) => {
 
   currentWeatherContainer.innerHTML = dataToday
 }
+
+// Event Listener
+form.addEventListener('submit', getUserData)
