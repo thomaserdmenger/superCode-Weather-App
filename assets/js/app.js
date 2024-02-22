@@ -47,8 +47,8 @@ const renderMenu = (cities) => {
 
     // Event Handler
     const getLatLong = () => {
-      const { lat, lon } = city
-      fetchWeatherData(lat, lon)
+      const { lat, lon, name } = city
+      fetchWeatherData(lat, lon, name)
     }
 
     // Event Listener
@@ -57,19 +57,24 @@ const renderMenu = (cities) => {
 }
 
 // Fetch Data from API
-const fetchWeatherData = (lat = 37.334606, lon = -122.009102) => {
+const fetchWeatherData = (
+  lat = 37.334606,
+  lon = -122.009102,
+  name = 'Cupertino'
+) => {
   fetch(
     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${KEY}&units=metric&lang=de`
   )
     .then((res) => res.json())
-    .then((data) => renderWeatherData(data))
+    .then((data) => renderWeatherData(data, name))
 }
 
 fetchWeatherData()
 
 // Render Data
-const renderWeatherData = (data) => {
+const renderWeatherData = (data, name) => {
   const dataToday = `
+    <p class="city">${name}</p>
     <p class="para">${data.weather[0].description}</p>
     <p class="temp">${Math.round(data.main.temp)}°C</p>
     <img src="https://openweathermap.org/img/wn/${

@@ -25,6 +25,7 @@ html {
   flex-direction: column;
   background-color: var(--color-glazier);
   color: var(--color-white);
+  padding-block-start: 2rem;
 }
 
 .current-weather {
@@ -39,8 +40,14 @@ html {
 }
 
 .current-weather .temp {
-  font-size: 4rem;
+  font-size: 5rem;
   font-weight: 500;
+  margin-block-start: 2rem;
+}
+
+.current-weather .city {
+  font-size: 2rem;
+  margin-block-end: 0.2rem;
 }
 
 .current-weather .more-infos {
@@ -69,13 +76,34 @@ form {
   margin-block-start: 2rem;
 }
 
-form select {
+form > div {
+  display: flex;
   width: 70%;
 }
 
+form input[type='text'] {
+  padding: 0.5rem;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+}
+
+form select {
+  font-size: 1.2rem;
+  width: 70%;
+  height: 170px;
+  border: none;
+  border-radius: 5px;
+  padding-inline: 0.5rem;
+}
+
+form select option {
+  margin-block: 0.5rem;
+}
+
 #city-options {
-  /* display: none; */
-  display: block;
+  display: none;
 }
 
 #city-options.show {
