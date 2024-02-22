@@ -49,6 +49,9 @@ const renderMenu = (cities) => {
     const getLatLong = () => {
       const { lat, lon, name } = city
       fetchWeatherData(lat, lon, name)
+      document.querySelector('input[type="text"]').value = ''
+      document.querySelector('select').innerHTML = ''
+      document.querySelector('select').classList.remove('show')
     }
 
     // Event Listener
