@@ -100,7 +100,7 @@ const renderWeatherData = (data, name) => {
 
   // Create Content for Rendering
   const dataToday = `
-    <p class="city">${name}</p>
+    <p class="city">${name}, ${data.sys.country}</p>
     <p class="para">${data.weather[0].description}</p>
     <p class="temp">${Math.round(data.main.temp)}°C</p>
     <img src="https://openweathermap.org/img/wn/${
