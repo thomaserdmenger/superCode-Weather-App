@@ -41,6 +41,7 @@ const getUserData = (e) => {
   )
     .then((res) => res.json())
     .then((cities) => renderMenu(cities))
+    .catch((err) => console(err))
 }
 
 // ! Render Options Menu
@@ -79,6 +80,7 @@ const fetchWeatherData = (lat = 49.8833, lon = 7.7667, name = 'Sommerloch') => {
   )
     .then((res) => res.json())
     .then((data) => renderWeatherData(data, name))
+    .catch((err) => console(err))
 }
 
 fetchWeatherData()
@@ -145,6 +147,7 @@ const fetchForcastData = (lat = 49.8833, lon = 7.7667) => {
   )
     .then((res) => res.json())
     .then((forcastData) => renderForcastData(forcastData))
+    .catch((err) => console(err))
 }
 
 fetchForcastData()
