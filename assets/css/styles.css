@@ -134,3 +134,23 @@ form select option {
   flex-direction: column;
   height: 170px;
 }
+
+/* ! Weather Forcast Data */
+
+.forcast-weather-days-container {
+  display: flex;
+  margin: 0 auto;
+  gap: 0.5rem;
+  padding-block: 1rem;
+  width: 70%;
+  overflow-x: auto; /* Horizontales Scrollen ermöglichen */
+  white-space: nowrap; /* Verhindern, dass <p>-Elemente umgebrochen werden */
+  scrollbar-width: none; /* Breite 0: Scrollleiste ausblenden */
+}
+
+.forcast-weather-single-days-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
