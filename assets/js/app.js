@@ -1,17 +1,11 @@
 // Get DOM Elements
 const wrapper = document.querySelector('.wrapper')
 const currentWeatherContainer = document.querySelector('.current-weather')
+const inputField = document.querySelector('input[type="text"]')
 
 // Declare Variables
 const KEY = 'e1678d75ce4af9fec1178e60c5f88016'
 const dateToday = new Date()
-const dateDay = dateToday.toLocaleString('default', { weekday: 'long' })
-const dateMonth = dateToday.toLocaleString('default', { month: 'long' })
-const dateDayNumber = dateToday.getDate()
-const dateYear = dateToday.getFullYear()
-const dateHours = dateToday.getHours()
-const dateMinutes = dateToday.getMinutes()
-const inputField = document.querySelector('input[type="text"]')
 
 // Event Handler
 const getUserData = (e) => {
@@ -77,6 +71,34 @@ fetchWeatherData()
 
 // Render Data
 const renderWeatherData = (data, name) => {
+  const timestamp = data.dt
+  const timezoneOffsetSeconds = data.timezone
+
+  // Zeitstempel in Millisekunden umwandeln
+  const timestampMilliseconds = timestamp * 1000
+
+  // Zeitstempel in ein Datum-Objekt konvertieren
+  const date = new Date(timestampMilliseconds)
+
+  // Lokale Uhrzeit basierend auf der Zeitzone berechnen
+  const localTime = new Date(date.getTime() + timezoneOffsetSeconds * 1000)
+
+  // Eine Stunde abziehen
+  localTime.setHours(localTime.getHours() - 1)
+
+  // Lokale Uhrzeit im gewünschten Format ausgeben (z.B. HH:MM:SS)
+  const formattedLocalTime = localTime.toLocaleTimeString('de-DE', {
+    hour: '2-digit',
+    minute: '2-digit'
+  })
+
+  // Wochentag, Monat, Jahr
+  const dateDay = date.toLocaleString('default', { weekday: 'short' })
+  const dateDayNumber = date.getDate()
+  const dateMonth = date.toLocaleString('default', { month: 'short' })
+  const dateYear = date.getFullYear()
+
+  // Create Content for Rendering
   const dataToday = `
     <p class="city">${name}</p>
     <p class="para">${data.weather[0].description}</p>
@@ -86,9 +108,7 @@ const renderWeatherData = (data, name) => {
     }@2x.png" alt="">
     <p class="para">${dateDay}, ${dateDayNumber}. ${
     dateMonth < 10 ? `0${dateMonth}` : dateMonth
-  } ${dateYear} | ${dateHours < 10 ? `0${dateHours}` : dateHours}:${
-    dateMinutes < 10 ? `0${dateMinutes}` : dateMinutes
-  } Uhr</p>
+  } ${dateYear} | ${formattedLocalTime} Uhr</p>
     <div class="more-infos">
         <div>
             <p>${data.main.humidity}%</p>
@@ -105,6 +125,7 @@ const renderWeatherData = (data, name) => {
     </div>
   `
 
+  // Render Data
   currentWeatherContainer.innerHTML = dataToday
 }
 
