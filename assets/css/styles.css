@@ -19,6 +19,10 @@ html {
     Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+body {
+  background-color: var(--color-glazier);
+}
+
 .wrapper {
   min-height: 100vh;
   display: flex;
@@ -26,6 +30,8 @@ html {
   background-color: var(--color-glazier);
   color: var(--color-white);
   padding-block: 3rem;
+  max-width: 768px;
+  margin: 0 auto;
 }
 
 /* ! Weather Data */
