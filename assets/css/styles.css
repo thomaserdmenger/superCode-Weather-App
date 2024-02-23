@@ -53,6 +53,11 @@ html {
   gap: 1rem;
 }
 
+.current-weather img {
+  width: 150px;
+  margin-block-start: -1.5rem;
+}
+
 .current-weather .city {
   font-size: 2rem;
   margin-block-end: 0.2rem;
