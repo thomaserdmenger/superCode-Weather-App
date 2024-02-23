@@ -62,9 +62,9 @@ const renderMenu = (cities) => {
 
 // Fetch Data from API
 const fetchWeatherData = (
-  lat = 37.334606,
-  lon = -122.009102,
-  name = 'Cupertino'
+  lat = 38.736946,
+  lon = -9.142685,
+  name = 'Lissabon'
 ) => {
   fetch(
     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${KEY}&units=metric&lang=de`
