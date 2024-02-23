@@ -46,8 +46,16 @@ const getUserData = (e) => {
 
 // ! Render Options Menu
 const renderMenu = (cities) => {
-  const menuContainer = document.querySelector('#city-options')
   document.querySelector('select').innerHTML = ''
+  const menuContainer = document.querySelector('#city-options')
+
+  if (cities.length === 0) {
+    const optionEl = document.createElement('option')
+    optionEl.textContent = `Keine Stadt gefunden`
+    menuContainer.appendChild(optionEl)
+    return
+  }
+
   cities.forEach((city) => {
     const optionEl = document.createElement('option')
 
