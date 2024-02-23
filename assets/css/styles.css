@@ -1,7 +1,11 @@
 :root {
-  --color-horizon: hsl(213, 32%, 52%);
-  --color-glazier: hsl(210, 34%, 63%);
+  --color-blue-light: #1bc2f5;
+  --color-blue-dark: #126ff2;
+  --color-black: #000a18;
+  --color-black-trans: hsla(215, 100%, 5%, 0.6);
   --color-white: hsl(0, 0%, 100%);
+  --color-white-trans: hsla(0, 0%, 100%, 0.5);
+  --border-radius: 15px;
 }
 
 * {
@@ -20,18 +24,38 @@ html {
 }
 
 body {
-  background-color: var(--color-glazier);
+  min-height: 100vh;
+  background: linear-gradient(
+    to top right,
+    var(--color-blue-dark),
+    var(--color-blue-light)
+  );
+  display: flex;
+  align-items: center;
 }
 
 .wrapper {
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background-color: var(--color-glazier);
   color: var(--color-white);
-  padding-block: 3rem;
-  max-width: 768px;
+  max-width: 430px;
   margin: 0 auto;
+  border: 10px solid var(--color-black);
+  border-radius: 55px;
+  overflow: hidden;
+  min-height: 95vh;
+  background-color: var(--color-black);
+}
+
+.wrapper > div {
+  padding-block: 2rem 3rem;
+  background: linear-gradient(
+    to top right,
+    var(--color-blue-dark),
+    var(--color-blue-light)
+  );
+  border-bottom-left-radius: 55px;
+  border-bottom-right-radius: 55px;
 }
 
 /* ! Weather Data */
@@ -77,10 +101,10 @@ body {
   display: flex;
   gap: 1rem;
   font-size: 1.2rem;
-  background-color: var(--color-horizon);
+  background-color: var(--color-black-trans);
   padding: 1rem;
-  border-radius: 15px;
-  width: 70%;
+  border-radius: var(--border-radius);
+  width: 80%;
   justify-content: space-around;
   margin-block-start: 1rem;
 }
@@ -91,69 +115,12 @@ body {
   align-items: center;
 }
 
-/* ! Form */
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-form > div {
-  display: flex;
-  width: 70%;
-}
-
-form input[type='text'] {
-  margin-block-start: 2rem;
-  padding: 0.7rem 0.5rem;
-  width: 100%;
-  border: none;
-  border-radius: 5px;
-  font-size: 1.2rem;
-  outline: none;
-  transition: 0.5s;
-}
-
-form input[type='text']:focus {
-  margin-block-start: 1.5rem;
-  padding: 1.2rem 1rem;
-  width: 110%;
-}
-
-form input[type='text']::placeholder {
-  text-align: center;
-}
-
-form select {
-  font-size: 1rem;
-  width: 70%;
-  border: none;
-  border-radius: 5px;
-  padding-inline: 0.5rem;
-}
-
-form select option {
-  margin-block: 0.5rem;
-}
-
-#city-options {
-  height: 0;
-  transition: all 0.5s;
-  outline: none;
-}
-
-#city-options.show {
-  display: flex;
-  flex-direction: column;
-  height: 145px;
-}
-
 /* ! Weather Forcast Data */
 
 .forcast-weather-days-container {
   display: flex;
   margin: 0 auto;
-  gap: 1.5rem;
+  gap: 1.2rem;
   padding-block: 2rem 1rem;
   width: 70%;
   cursor: pointer;
@@ -177,4 +144,70 @@ form select option {
 .forcast-weather-single-days-container p:nth-of-type(3) {
   font-weight: 600;
   font-size: 1.1rem;
+}
+
+/* ! Form */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form > div {
+  display: flex;
+  width: 80%;
+}
+
+form input[type='text'] {
+  background-color: var(--color-black-trans);
+  border-radius: var(--border-radius);
+  border: 2px solid var(--color-white-trans);
+  color: var(--color-white);
+  font-size: 1.2rem;
+  margin-block-end: 0.5rem;
+  margin-block-start: 2rem;
+  outline: none;
+  padding: 0.7rem 0.5rem;
+  transition: 0.5s;
+  width: 100%;
+}
+
+form input[type='text']:focus {
+  margin-block-start: 1.5rem;
+  padding: 1.2rem 1rem;
+  /* width: 110%; */
+}
+
+form input[type='text']::placeholder {
+  text-align: center;
+  color: var(--color-white);
+}
+
+form select {
+  font-size: 1.1rem;
+  width: 80%;
+  border: none;
+  border-radius: var(--border-radius);
+  padding-inline: 0.5rem;
+  color: var(--color-white);
+  background-color: var(--color-black);
+  height: 0;
+  transition: all 0.5s;
+  outline: none;
+}
+
+form select.show {
+  border: 1px solid var(--color-white-trans);
+  transition: 1s;
+}
+
+form select option {
+  margin-block: 1rem;
+}
+
+form select.show {
+  display: flex;
+  flex-direction: column;
+  height: 210px;
+  /* min-height: 100px; */
 }

@@ -73,11 +73,7 @@ const renderMenu = (cities) => {
 }
 
 // Fetch Weather Data from API
-const fetchWeatherData = (
-  lat = 38.736946,
-  lon = -9.142685,
-  name = 'Lissabon'
-) => {
+const fetchWeatherData = (lat = 49.8833, lon = 7.7667, name = 'Sommerloch') => {
   fetch(
     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${KEY}&units=metric&lang=de`
   )
@@ -143,7 +139,7 @@ const renderWeatherData = (data, name) => {
 inputField.addEventListener('input', getUserData)
 
 // ! Fetch Forcast Data
-const fetchForcastData = (lat = 38.736946, lon = -9.142685) => {
+const fetchForcastData = (lat = 49.8833, lon = 7.7667) => {
   fetch(
     `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${KEY}&units=metric&lang=de`
   )
