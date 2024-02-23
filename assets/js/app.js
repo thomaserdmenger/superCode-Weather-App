@@ -2,6 +2,7 @@
 const wrapper = document.querySelector('.wrapper')
 const currentWeatherContainer = document.querySelector('.current-weather')
 const inputField = document.querySelector('input[type="text"]')
+const forcastContainer = document.querySelector('.forcast-weather')
 
 // Declare Variables
 const KEY = 'e1678d75ce4af9fec1178e60c5f88016'
@@ -20,7 +21,7 @@ const getUserData = (e) => {
 
   // Fetch City from API
   fetch(
-    `http://api.openweathermap.org/geo/1.0/direct?q=${userInputVal}&limit=10&appid=${KEY}`
+    `http://api.openweathermap.org/geo/1.0/direct?q=${userInputVal}&limit=10&appid=${KEY}&units=metric&lang=de`
   )
     .then((res) => res.json())
     .then((cities) => renderMenu(cities))
@@ -44,6 +45,7 @@ const renderMenu = (cities) => {
     const getLatLong = () => {
       const { lat, lon, name } = city
       fetchWeatherData(lat, lon, name)
+      fetchForcastData(lat, lon)
       document.querySelector('input[type="text"]').value = ''
       document.querySelector('select').innerHTML = ''
       document.querySelector('select').classList.remove('show')
@@ -54,7 +56,7 @@ const renderMenu = (cities) => {
   })
 }
 
-// Fetch Data from API
+// Fetch Weather Data from API
 const fetchWeatherData = (
   lat = 38.736946,
   lon = -9.142685,
@@ -137,3 +139,75 @@ const renderWeatherData = (data, name) => {
 
 // Event Listener
 inputField.addEventListener('input', getUserData)
+
+// ! Fetch Forcast Data
+const fetchForcastData = (lat = 38.736946, lon = -9.142685) => {
+  fetch(
+    `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${KEY}&units=metric&lang=de`
+  )
+    .then((res) => res.json())
+    .then((forcastData) => renderForcastData(forcastData))
+}
+
+fetchForcastData()
+
+const renderForcastData = (forcastData) => {
+  forcastContainer.innerHTML = ''
+  const daysContainer = document.createElement('div')
+  daysContainer.classList.add('forcast-weather-days-container')
+  forcastData.list.forEach((item) => {
+    // Get Time
+    const newTime = new Date(item.dt_txt)
+    const hours =
+      newTime.getHours() < 10 ? `0${newTime.getHours()}` : newTime.getHours()
+
+    const time = `${hours} Uhr`
+    const timeEl = document.createElement('p')
+    timeEl.textContent = time
+
+    // Get Day and Month
+    const months = [
+      'Jan',
+      'Feb',
+      'Mär',
+      'Apr',
+      'Mai',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Okt',
+      'Nov',
+      'Dez'
+    ]
+    const monthIndex = newTime.getMonth()
+    const month = months[monthIndex]
+    const newDay =
+      newTime.getDate() < 10 ? `0${newTime.getDate()}` : newTime.getDate()
+    const dateEl = document.createElement('p')
+    dateEl.textContent = `${newDay}. ${month}`
+
+    // Create Container
+    const singleDayContainer = document.createElement('div')
+
+    // Append Classes
+    singleDayContainer.classList.add('forcast-weather-single-days-container')
+
+    // Get Images
+    const dayImg = document.createElement('img')
+    dayImg.setAttribute(
+      'src',
+      `https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`
+    )
+
+    // Get Temperatures
+    const dayTemp = document.createElement('p')
+    dayTemp.textContent = `${Math.round(item.main.temp)}°C`
+
+    // Append Elements
+    singleDayContainer.append(dateEl, timeEl, dayImg, dayTemp)
+    daysContainer.append(singleDayContainer)
+  })
+
+  forcastContainer.append(daysContainer)
+}
