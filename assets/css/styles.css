@@ -1,17 +1,17 @@
 :root {
-  --color-blue-light: #1bc2f5;
-  --color-blue-dark: #126ff2;
-  --color-black: #000a18;
-  --color-black-trans: hsla(215, 100%, 5%, 0.6);
-  --color-white: hsl(0, 0%, 100%);
-  --color-white-trans: hsla(0, 0%, 100%, 0.5);
   --border-radius: 15px;
+  --color-black-trans: hsla(215, 100%, 5%, 0.6);
+  --color-black: #000a18;
+  --color-blue-dark: #126ff2;
+  --color-blue-light: #1bc2f5;
+  --color-white-trans: hsla(0, 0%, 100%, 0.5);
+  --color-white: hsl(0, 0%, 100%);
 }
 
 * {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 img {
@@ -24,31 +24,30 @@ html {
 }
 
 body {
-  min-height: 100vh;
   background: linear-gradient(
     to top right,
     var(--color-blue-dark),
     var(--color-blue-light)
   );
+  min-height: 100vh;
   display: flex;
   align-items: center;
 }
 
 .wrapper {
+  background-color: var(--color-black);
+  border-radius: 55px;
+  border: 10px solid var(--color-black);
+  color: var(--color-white);
   display: flex;
   flex-direction: column;
-  color: var(--color-white);
-  max-width: 430px;
   margin: 0 auto;
-  border: 10px solid var(--color-black);
-  border-radius: 55px;
-  overflow: hidden;
+  max-width: 430px;
   min-height: 95vh;
-  background-color: var(--color-black);
+  overflow: hidden;
 }
 
 .wrapper > div {
-  padding-block: 2rem 3rem;
   background: linear-gradient(
     to top right,
     var(--color-blue-dark),
@@ -56,14 +55,15 @@ body {
   );
   border-bottom-left-radius: 55px;
   border-bottom-right-radius: 55px;
+  padding-block: 2rem 3rem;
 }
 
 /* ! Weather Data */
 
 .current-weather {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .current-weather .para {
@@ -72,24 +72,24 @@ body {
 }
 
 .current-weather .temp {
-  font-size: 5rem;
+  color: var(--color-white);
+  font-size: 6rem;
   font-weight: 500;
   margin-block-start: 2rem;
-  color: var(--color-white);
   text-shadow: 0 0 10px hsla(0, 3%, 15%, 0.5);
 }
 
 .current-weather .temp-high-low {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
   font-weight: 500;
+  gap: 1rem;
+  justify-content: center;
   margin-block: -0.2rem 0.5rem;
 }
 
 .current-weather img {
-  width: 150px;
   margin-block-start: -1.5rem;
+  width: 150px;
 }
 
 .current-weather .city {
@@ -98,41 +98,41 @@ body {
 }
 
 .current-weather .more-infos {
-  display: flex;
-  gap: 1rem;
-  font-size: 1.2rem;
   background-color: var(--color-black-trans);
-  padding: 1rem;
   border-radius: var(--border-radius);
-  width: 80%;
+  display: flex;
+  font-size: 1.2rem;
+  gap: 1rem;
   justify-content: space-around;
   margin-block-start: 1rem;
+  padding: 1rem;
+  width: 80%;
 }
 
 .current-weather .more-infos div {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 /* ! Weather Forcast Data */
 
 .forcast-weather-days-container {
-  display: flex;
-  margin: 0 auto;
-  gap: 1.2rem;
-  padding-block: 2rem 1rem;
-  width: 70%;
   cursor: pointer;
+  display: flex;
+  gap: 1.2rem;
+  margin: 0 auto;
   overflow-x: auto; /* Horizontales Scrollen ermöglichen */
-  white-space: nowrap; /* Verhindern, dass <p>-Elemente umgebrochen werden */
+  padding-block: 2rem 1rem;
   scrollbar-width: none; /* Breite 0: Scrollleiste ausblenden */
+  white-space: nowrap; /* Verhindern, dass <p>-Elemente umgebrochen werden */
+  width: 70%;
 }
 
 .forcast-weather-single-days-container {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: space-between;
 }
 
@@ -142,15 +142,15 @@ body {
 }
 
 .forcast-weather-single-days-container p:nth-of-type(3) {
-  font-weight: 600;
   font-size: 1.1rem;
+  font-weight: 600;
 }
 
 /* ! Form */
 form {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 form > div {
@@ -175,25 +175,25 @@ form input[type='text'] {
 form input[type='text']:focus {
   margin-block-start: 1.5rem;
   padding: 1.2rem 1rem;
-  /* width: 110%; */
 }
 
 form input[type='text']::placeholder {
-  text-align: center;
   color: var(--color-white);
+  text-align: center;
 }
 
 form select {
-  font-size: 1.1rem;
-  width: 80%;
-  border: none;
-  border-radius: var(--border-radius);
-  padding-inline: 0.5rem;
-  color: var(--color-white);
   background-color: var(--color-black);
+  border-radius: var(--border-radius);
+  border: none;
+  color: var(--color-white);
+  font-size: 1.1rem;
   height: 0;
-  transition: all 0.5s;
+  margin-block-end: 1rem;
   outline: none;
+  padding-inline: 0.5rem;
+  transition: all 0.5s;
+  width: 80%;
 }
 
 form select.show {
@@ -209,5 +209,4 @@ form select.show {
   display: flex;
   flex-direction: column;
   height: 210px;
-  /* min-height: 100px; */
 }
