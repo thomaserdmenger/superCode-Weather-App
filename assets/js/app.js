@@ -7,6 +7,22 @@ const forcastContainer = document.querySelector('.forcast-weather')
 // Declare Variables
 const KEY = 'e1678d75ce4af9fec1178e60c5f88016'
 const dateToday = new Date()
+const monthsArr = [
+  'Jan',
+  'Feb',
+  'Mär',
+  'Apr',
+  'Mai',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Okt',
+  'Nov',
+  'Dez'
+]
+
+const daysArr = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa']
 
 // Event Handler
 const getUserData = (e) => {
@@ -76,29 +92,15 @@ const renderWeatherData = (data, name) => {
   const timestamp = data.dt
   const timezoneOffsetSeconds = data.timezone
 
-  // Zeitstempel in Millisekunden umwandeln
-  const timestampMilliseconds = timestamp * 1000
-
-  // Zeitstempel in ein Datum-Objekt konvertieren
-  const date = new Date(timestampMilliseconds)
-
-  // Lokale Uhrzeit basierend auf der Zeitzone berechnen
-  const localTime = new Date(date.getTime() + timezoneOffsetSeconds * 1000)
-
-  // Eine Stunde abziehen
-  localTime.setHours(localTime.getHours() - 1)
-
-  // Lokale Uhrzeit im gewünschten Format ausgeben (z.B. HH:MM:SS)
-  const formattedLocalTime = localTime.toLocaleTimeString('de-DE', {
-    hour: '2-digit',
-    minute: '2-digit'
-  })
-
-  // Wochentag, Monat, Jahr
-  const dateDay = date.toLocaleString('default', { weekday: 'short' })
-  const dateDayNumber = date.getDate()
-  const dateMonth = date.toLocaleString('default', { month: 'short' })
-  const dateYear = date.getFullYear()
+  const currentTime = new Date((timestamp + timezoneOffsetSeconds) * 1000)
+  const currentHours = currentTime.getHours() - 1
+  const currentMinutes = currentTime.getMinutes()
+  const monthNumber = currentTime.getMonth()
+  const monthString = monthsArr[monthNumber]
+  const currentYear = currentTime.getFullYear()
+  const currentDate = currentTime.getDate()
+  const currentWeekdayIndex = currentTime.getDay()
+  const currentWeekday = daysArr[currentWeekdayIndex]
 
   // Create Content for Rendering
   const dataToday = `
@@ -114,9 +116,9 @@ const renderWeatherData = (data, name) => {
     <img src="https://openweathermap.org/img/wn/${
       data.weather[0].icon
     }@2x.png" alt="">
-    <p class="para">${dateDay}, ${dateDayNumber}. ${
-    dateMonth < 10 ? `0${dateMonth}` : dateMonth
-  } ${dateYear} | ${formattedLocalTime} Uhr</p>
+    <p class="para">${currentWeekday}, ${currentDate}. ${monthString} ${currentYear} | ${
+    currentHours < 10 ? `0${currentHours}` : currentHours
+  }:${currentMinutes < 10 ? `0${currentMinutes}` : currentMinutes} Uhr</p>
     <div class="more-infos">
         <div>
             <p>${data.main.humidity}%</p>
@@ -166,22 +168,9 @@ const renderForcastData = (forcastData) => {
     timeEl.textContent = time
 
     // Get Day and Month
-    const months = [
-      'Jan',
-      'Feb',
-      'Mär',
-      'Apr',
-      'Mai',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Okt',
-      'Nov',
-      'Dez'
-    ]
+
     const monthIndex = newTime.getMonth()
-    const month = months[monthIndex]
+    const month = monthsArr[monthIndex]
     const newDay =
       newTime.getDate() < 10 ? `0${newTime.getDate()}` : newTime.getDate()
     const dateEl = document.createElement('p')
