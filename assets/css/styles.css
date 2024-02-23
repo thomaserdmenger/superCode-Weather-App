@@ -25,7 +25,7 @@ html {
   flex-direction: column;
   background-color: var(--color-glazier);
   color: var(--color-white);
-  padding-block-start: 2rem;
+  padding-block: 3rem;
 }
 
 /* ! Weather Data */
@@ -45,12 +45,16 @@ html {
   font-size: 5rem;
   font-weight: 500;
   margin-block-start: 2rem;
+  color: var(--color-white);
+  text-shadow: 0 0 10px hsla(0, 3%, 15%, 0.5);
 }
 
 .current-weather .temp-high-low {
   display: flex;
   justify-content: center;
   gap: 1rem;
+  font-weight: 500;
+  margin-block: -0.2rem 0.5rem;
 }
 
 .current-weather img {
@@ -95,7 +99,7 @@ form > div {
 
 form input[type='text'] {
   margin-block-start: 2rem;
-  padding: 0.5rem;
+  padding: 0.7rem 0.5rem;
   width: 100%;
   border: none;
   border-radius: 5px;
@@ -106,9 +110,12 @@ form input[type='text'] {
 
 form input[type='text']:focus {
   margin-block-start: 1.5rem;
-
-  padding: 1rem;
+  padding: 1.2rem 1rem;
   width: 110%;
+}
+
+form input[type='text']::placeholder {
+  text-align: center;
 }
 
 form select {
@@ -132,7 +139,7 @@ form select option {
 #city-options.show {
   display: flex;
   flex-direction: column;
-  height: 170px;
+  height: 145px;
 }
 
 /* ! Weather Forcast Data */
@@ -140,9 +147,10 @@ form select option {
 .forcast-weather-days-container {
   display: flex;
   margin: 0 auto;
-  gap: 0.5rem;
-  padding-block: 1rem;
+  gap: 1.5rem;
+  padding-block: 2rem 1rem;
   width: 70%;
+  cursor: pointer;
   overflow-x: auto; /* Horizontales Scrollen ermöglichen */
   white-space: nowrap; /* Verhindern, dass <p>-Elemente umgebrochen werden */
   scrollbar-width: none; /* Breite 0: Scrollleiste ausblenden */
@@ -153,4 +161,14 @@ form select option {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+}
+
+.forcast-weather-single-days-container p:nth-of-type(1) {
+  font-weight: 700;
+  margin-block-end: 0.1rem;
+}
+
+.forcast-weather-single-days-container p:nth-of-type(3) {
+  font-weight: 600;
+  font-size: 1.1rem;
 }
