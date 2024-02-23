@@ -102,7 +102,13 @@ const renderWeatherData = (data, name) => {
   const dataToday = `
     <p class="city">${name}, ${data.sys.country}</p>
     <p class="para">${data.weather[0].description}</p>
-    <p class="temp">${Math.round(data.main.temp)}°C</p>
+    <div>
+      <p class="temp">${Math.round(data.main.temp)}°C</p>
+      <div class="temp-high-low">
+        <p>T: ${Math.round(data.main.temp_min)}°C</p>
+        <p>H: ${Math.round(data.main.temp_max)}°C</p>
+      </div>
+    </div>
     <img src="https://openweathermap.org/img/wn/${
       data.weather[0].icon
     }@2x.png" alt="">
