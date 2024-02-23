@@ -28,6 +28,8 @@ html {
   padding-block-start: 2rem;
 }
 
+/* ! Weather Data */
+
 .current-weather {
   display: flex;
   flex-direction: column;
@@ -43,6 +45,12 @@ html {
   font-size: 5rem;
   font-weight: 500;
   margin-block-start: 2rem;
+}
+
+.current-weather .temp-high-low {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .current-weather .city {
