@@ -28,9 +28,13 @@ const monthsArr = [
 
 const daysArr = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa']
 
+// Focus Input Field
+inputField.focus()
+
 // Event Handler
 const getUserData = (e) => {
   e.preventDefault()
+
   // Get User Input
   const userInputVal = document
     .querySelector('input[type="text"]')
@@ -45,7 +49,7 @@ const getUserData = (e) => {
   )
     .then((res) => res.json())
     .then((cities) => renderMenu(cities))
-    .catch((err) => console(err))
+    .catch((err) => console.log(err))
 }
 
 // Render Options Menu
@@ -89,6 +93,7 @@ const renderMenu = (cities) => {
       document.querySelector('input[type="text"]').value = ''
       document.querySelector('select').innerHTML = ''
       document.querySelector('select').classList.remove('show')
+      inputField.focus()
     }
 
     // Event Listener
@@ -100,6 +105,7 @@ const btnErrorHandling = () => {
   document.querySelector('#user-input').value = ''
   errorBtn.classList.remove('show')
   menuContainer.classList.remove('show')
+  inputField.focus()
 }
 
 // Fetch Weather Data from API
@@ -113,7 +119,7 @@ const fetchWeatherData = (
   )
     .then((res) => res.json())
     .then((data) => renderWeatherData(data, name))
-    .catch((err) => console(err))
+    .catch((err) => console.log(err))
 }
 
 fetchWeatherData()
@@ -179,7 +185,7 @@ const fetchForcastData = (lat = 40.776676, lon = -73.971321) => {
   )
     .then((res) => res.json())
     .then((forcastData) => renderForcastData(forcastData))
-    .catch((err) => console(err))
+    .catch((err) => console.log(err))
 }
 
 fetchForcastData()
@@ -231,9 +237,6 @@ const renderForcastData = (forcastData) => {
     daysContainer.append(singleDayContainer)
 
     singleDayContainer.addEventListener('click', (event) => {
-      // #temp
-      console.log(forcastData)
-
       forcastDetailsPage.innerHTML = ''
       document.querySelector('.current-weather').style.display = 'none'
       document.querySelector('.forcast-weather').style.display = 'none'
@@ -323,6 +326,7 @@ const renderForcastData = (forcastData) => {
           document.querySelector('.current-weather').style.display = 'flex'
           document.querySelector('.forcast-weather').style.display = 'flex'
           form.style.display = 'flex'
+          inputField.focus()
         })
       }
     })
