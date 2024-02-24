@@ -227,9 +227,14 @@ const renderForcastData = (forcastData) => {
     daysContainer.append(singleDayContainer)
 
     singleDayContainer.addEventListener('click', (event) => {
+      // #temp
+      console.log(forcastData)
+
+      forcastDetailsPage.innerHTML = ''
       document.querySelector('.current-weather').style.display = 'none'
       document.querySelector('.forcast-weather').style.display = 'none'
       form.style.display = 'none'
+      forcastDetailsPage.style.display = 'flex'
 
       // City
       const city = event.target
@@ -292,8 +297,28 @@ const renderForcastData = (forcastData) => {
           const description = document.createElement('p')
           description.textContent = `${item.weather[0].description}`
 
-          forcastDetailsContainers.append(img, temp, description)
+          // Hours
+          const forcastHours = item.dt_txt
+          const forcastHoursString = `${forcastHours.slice(11, 13)} Uhr`
+
+          forcastDetailsContainers.append(
+            img,
+            forcastHoursString,
+            temp,
+            description
+          )
           forcastDetailsPage.append(forcastDetailsContainers)
+        })
+
+        const backBtn = document.createElement('button')
+        backBtn.classList.add('backBtn')
+        backBtn.innerHTML = '<i class="fa-solid fa-circle-chevron-left"></i>'
+        forcastDetailsPage.append(backBtn)
+        backBtn.addEventListener('click', () => {
+          forcastDetailsPage.style.display = 'none'
+          document.querySelector('.current-weather').style.display = 'flex'
+          document.querySelector('.forcast-weather').style.display = 'flex'
+          form.style.display = 'flex'
         })
       }
     })
