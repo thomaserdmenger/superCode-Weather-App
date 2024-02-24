@@ -191,9 +191,7 @@ const renderForcastData = (forcastData) => {
         ? `0${newTime.getUTCHours()}`
         : newTime.getUTCHours()
 
-    const time = `${hours} Uhr`
-    const timeEl = document.createElement('p')
-    timeEl.textContent = time
+    if (hours !== 14) return
 
     // Get Day and Month
     const monthIndex = newTime.getUTCMonth()
@@ -223,7 +221,7 @@ const renderForcastData = (forcastData) => {
     dayTemp.textContent = `${Math.round(item.main.temp)}°C`
 
     // Append Elements
-    singleDayContainer.append(dateEl, timeEl, dayImg, dayTemp)
+    singleDayContainer.append(dateEl, dayImg, dayTemp)
     daysContainer.append(singleDayContainer)
   })
 
