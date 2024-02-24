@@ -115,13 +115,13 @@ const renderWeatherData = (data, name) => {
   const timezoneOffsetSeconds = data.timezone
 
   const currentTime = new Date((timestamp + timezoneOffsetSeconds) * 1000)
-  const currentHours = currentTime.getHours() - 1
-  const currentMinutes = currentTime.getMinutes()
-  const monthNumber = currentTime.getMonth()
+  const currentHours = currentTime.getUTCHours()
+  const currentMinutes = currentTime.getUTCMinutes()
+  const monthNumber = currentTime.getUTCMonth()
   const monthString = monthsArr[monthNumber]
-  const currentYear = currentTime.getFullYear()
-  const currentDate = currentTime.getDate()
-  const currentWeekdayIndex = currentTime.getDay()
+  const currentYear = currentTime.getUTCFullYear()
+  const currentDate = currentTime.getUTCDate()
+  const currentWeekdayIndex = currentTime.getUTCDay()
   const currentWeekday = daysArr[currentWeekdayIndex]
 
   // Create Content for Rendering
@@ -183,18 +183,21 @@ const renderForcastData = (forcastData) => {
     // Get Time
     const newTime = new Date(item.dt_txt)
     const hours =
-      newTime.getHours() < 10 ? `0${newTime.getHours()}` : newTime.getHours()
+      newTime.getUTCHours() < 10
+        ? `0${newTime.getUTCHours()}`
+        : newTime.getUTCHours()
 
     const time = `${hours} Uhr`
     const timeEl = document.createElement('p')
     timeEl.textContent = time
 
     // Get Day and Month
-
-    const monthIndex = newTime.getMonth()
+    const monthIndex = newTime.getUTCMonth()
     const month = monthsArr[monthIndex]
     const newDay =
-      newTime.getDate() < 10 ? `0${newTime.getDate()}` : newTime.getDate()
+      newTime.getUTCDate() < 10
+        ? `0${newTime.getUTCDate()}`
+        : newTime.getUTCDate()
     const dateEl = document.createElement('p')
     dateEl.textContent = `${newDay}. ${month}`
 
