@@ -3,6 +3,8 @@ const wrapper = document.querySelector('.wrapper')
 const currentWeatherContainer = document.querySelector('.current-weather')
 const inputField = document.querySelector('input[type="text"]')
 const forcastContainer = document.querySelector('.forcast-weather')
+const errorBtn = document.querySelector('.input-reset-btn')
+const menuContainer = document.querySelector('#city-options')
 const form = document.querySelector('form')
 
 // Declare Variables
@@ -48,21 +50,17 @@ const getUserData = (e) => {
 // Render Options Menu
 const renderMenu = (cities) => {
   document.querySelector('select').innerHTML = ''
-  const menuContainer = document.querySelector('#city-options')
-  const errorBtn = document.querySelector('.input-reset-btn')
 
   // Add Button and Event Listener
   errorBtn.classList.add('show')
-  errorBtn.addEventListener('click', () => {
-    document.querySelector('#user-input').value = ''
-    errorBtn.classList.remove('show')
-    menuContainer.classList.remove('show')
-  })
+
+  errorBtn.addEventListener('click', btnErrorHandling)
 
   // Error Handling
   if (cities.length === 0) {
     const optionEl = document.createElement('option')
     optionEl.textContent = `Keine Stadt gefunden`
+    optionEl.addEventListener('click', btnErrorHandling)
     menuContainer.appendChild(optionEl)
     return
   }
@@ -95,6 +93,12 @@ const renderMenu = (cities) => {
     // Event Listener
     optionEl.addEventListener('click', getLatLong)
   })
+}
+
+const btnErrorHandling = () => {
+  document.querySelector('#user-input').value = ''
+  errorBtn.classList.remove('show')
+  menuContainer.classList.remove('show')
 }
 
 // Fetch Weather Data from API
