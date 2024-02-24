@@ -3,6 +3,7 @@ const wrapper = document.querySelector('.wrapper')
 const currentWeatherContainer = document.querySelector('.current-weather')
 const inputField = document.querySelector('input[type="text"]')
 const forcastContainer = document.querySelector('.forcast-weather')
+const form = document.querySelector('form')
 
 // Declare Variables
 const KEY = 'e1678d75ce4af9fec1178e60c5f88016'
@@ -44,11 +45,21 @@ const getUserData = (e) => {
     .catch((err) => console(err))
 }
 
-// ! Render Options Menu
+// Render Options Menu
 const renderMenu = (cities) => {
   document.querySelector('select').innerHTML = ''
   const menuContainer = document.querySelector('#city-options')
+  const errorBtn = document.querySelector('.input-reset-btn')
 
+  // Add Button and Event Listener
+  errorBtn.classList.add('show')
+  errorBtn.addEventListener('click', () => {
+    document.querySelector('#user-input').value = ''
+    errorBtn.classList.remove('show')
+    menuContainer.classList.remove('show')
+  })
+
+  // Error Handling
   if (cities.length === 0) {
     const optionEl = document.createElement('option')
     optionEl.textContent = `Keine Stadt gefunden`
@@ -56,6 +67,7 @@ const renderMenu = (cities) => {
     return
   }
 
+  // Render Content for each Element
   cities.forEach((city) => {
     const optionEl = document.createElement('option')
 
@@ -68,6 +80,10 @@ const renderMenu = (cities) => {
 
     // Event Handler
     const getLatLong = () => {
+      // Remove Error Button
+      errorBtn.classList.remove('show')
+
+      // Get Data
       const { lat, lon, name } = city
       fetchWeatherData(lat, lon, name)
       fetchForcastData(lat, lon)
@@ -148,7 +164,6 @@ const renderWeatherData = (data, name) => {
 // Event Listener
 inputField.addEventListener('input', getUserData)
 
-// ! Fetch Forcast Data
 const fetchForcastData = (lat = 49.8833, lon = 7.7667) => {
   fetch(
     `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${KEY}&units=metric&lang=de`
@@ -207,3 +222,8 @@ const renderForcastData = (forcastData) => {
 
   forcastContainer.append(daysContainer)
 }
+
+// Prevent Form from Submit
+form.addEventListener('submit', (e) => {
+  e.preventDefault()
+})

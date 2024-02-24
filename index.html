@@ -17,12 +17,15 @@
         <section class="forcast-weather"></section>
       </div>
       <form>
-        <div>
+        <div class="input-container">
           <input
             type="text"
             name="user-input"
             id="user-input"
             placeholder="Gib eine Stadt ein" />
+          <button class="input-reset-btn">
+            <i class="fa-solid fa-circle-xmark"></i>
+          </button>
         </div>
         <select
           multiple
@@ -31,6 +34,9 @@
           id="city-options"></select>
       </form>
     </div>
+    <script
+      src="https://kit.fontawesome.com/dc9a1f8fa8.js"
+      crossorigin="anonymous"></script>
     <script
       type="module"
       src="./assets/js/app.js"></script>
