@@ -120,7 +120,7 @@ body {
 .forcast-weather-days-container {
   cursor: pointer;
   display: flex;
-  gap: 1.2rem;
+  gap: 1.1rem;
   margin: 0 auto;
   overflow-x: auto; /* Horizontales Scrollen ermöglichen */
   padding-block: 2rem 1rem;
@@ -164,22 +164,45 @@ form input[type='text'] {
   border: 2px solid var(--color-white-trans);
   color: var(--color-white);
   font-size: 1.2rem;
+  margin-block-start: 1rem;
   margin-block-end: 0.5rem;
-  margin-block-start: 2rem;
   outline: none;
   padding: 0.7rem 0.5rem;
   transition: 0.5s;
   width: 100%;
+  cursor: pointer;
 }
 
 form input[type='text']:focus {
-  margin-block-start: 1.5rem;
-  padding: 1.2rem 1rem;
+  margin-block-start: 0.7rem;
+  padding: 1rem;
 }
 
 form input[type='text']::placeholder {
   color: var(--color-white);
   text-align: center;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-reset-btn {
+  all: unset;
+  position: absolute;
+  right: 1rem;
+  top: 1.8rem;
+  cursor: pointer;
+  display: none;
+}
+
+.input-reset-btn.show {
+  display: inline-block;
+}
+
+.fa-solid {
+  color: var(--color-white);
+  font-size: 1.5rem;
 }
 
 form select {
@@ -202,11 +225,12 @@ form select.show {
 }
 
 form select option {
-  margin-block: 1rem;
+  margin-block: 0.5rem;
+  cursor: pointer;
 }
 
 form select.show {
   display: flex;
   flex-direction: column;
-  height: 210px;
+  height: 160px;
 }
