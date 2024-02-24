@@ -42,7 +42,7 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  max-width: 430px;
+  width: 430px;
   min-height: 95vh;
   overflow: hidden;
 }
@@ -64,6 +64,8 @@ body {
   align-items: center;
   display: flex;
   flex-direction: column;
+  /* # temp */
+  /* display: none; */
 }
 
 .current-weather .para {
@@ -144,6 +146,33 @@ body {
 .forcast-weather-single-days-container p:nth-of-type(3) {
   font-size: 1.1rem;
   font-weight: 600;
+}
+
+/* ! Day Pages */
+.forcast-details-page {
+  display: flex;
+  flex-direction: column;
+  padding: 0 5%;
+  font-size: 1.1rem;
+}
+
+.forcastDetailsContainers {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.forcastDetailsContainers img {
+  width: 80px;
+}
+
+.headerEl {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-block-end: 2rem;
 }
 
 /* ! Form */

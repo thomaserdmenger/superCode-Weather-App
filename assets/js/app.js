@@ -6,6 +6,7 @@ const forcastContainer = document.querySelector('.forcast-weather')
 const errorBtn = document.querySelector('.input-reset-btn')
 const menuContainer = document.querySelector('#city-options')
 const form = document.querySelector('form')
+const forcastDetailsPage = document.querySelector('.forcast-details-page')
 
 // Declare Variables
 const KEY = 'e1678d75ce4af9fec1178e60c5f88016'
@@ -200,6 +201,7 @@ const renderForcastData = (forcastData) => {
       newTime.getUTCDate() < 10
         ? `0${newTime.getUTCDate()}`
         : newTime.getUTCDate()
+
     const dateEl = document.createElement('p')
     dateEl.textContent = `${newDay}. ${month}`
 
@@ -223,6 +225,78 @@ const renderForcastData = (forcastData) => {
     // Append Elements
     singleDayContainer.append(dateEl, dayImg, dayTemp)
     daysContainer.append(singleDayContainer)
+
+    singleDayContainer.addEventListener('click', (event) => {
+      document.querySelector('.current-weather').style.display = 'none'
+      document.querySelector('.forcast-weather').style.display = 'none'
+      form.style.display = 'none'
+
+      // City
+      const city = event.target
+        .closest('section')
+        .previousElementSibling.querySelector('.city').textContent
+
+      const cityEl = document.createElement('p')
+      cityEl.textContent = city.slice(0, city.length - 4)
+
+      // Date
+      const targetDate = event.target
+        .closest('div')
+        .querySelector('p').textContent
+
+      if (targetDate === dateEl.textContent) {
+        const filteredItems = forcastData.list.filter((item) =>
+          item.dt_txt.includes(`-${targetDate.slice(0, 2)} `)
+        )
+
+        // Get Time
+        const newTime = new Date(item.dt_txt)
+        const hours =
+          newTime.getUTCHours() < 10
+            ? `0${newTime.getUTCHours()}`
+            : newTime.getUTCHours()
+
+        // Get Day and Month
+        const monthIndex = newTime.getUTCMonth()
+        const month = monthsArr[monthIndex]
+        const newDay =
+          newTime.getUTCDate() < 10
+            ? `0${newTime.getUTCDate()}`
+            : newTime.getUTCDate()
+
+        const dateEl = document.createElement('p')
+        dateEl.textContent = `${newDay}. ${month}`
+
+        const headerEl = document.createElement('div')
+        headerEl.classList.add('headerEl')
+
+        headerEl.append(cityEl, dateEl)
+        forcastDetailsPage.append(headerEl)
+
+        filteredItems.forEach((item) => {
+          const forcastDetailsContainers = document.createElement('div')
+          forcastDetailsContainers.classList.add('forcastDetailsContainers')
+
+          // Image
+          const img = document.createElement('img')
+          img.setAttribute(
+            'src',
+            `https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`
+          )
+
+          // Temp
+          const temp = document.createElement('p')
+          temp.textContent = `${Math.round(item.main.temp)}°C`
+
+          // Beschreibung
+          const description = document.createElement('p')
+          description.textContent = `${item.weather[0].description}`
+
+          forcastDetailsContainers.append(img, temp, description)
+          forcastDetailsPage.append(forcastDetailsContainers)
+        })
+      }
+    })
   })
 
   forcastContainer.append(daysContainer)
