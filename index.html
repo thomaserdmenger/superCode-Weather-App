@@ -13,27 +13,27 @@
   <body>
     <div class="wrapper">
       <div class="sections-container">
+        <form>
+          <div class="input-container">
+            <input
+              type="text"
+              name="user-input"
+              id="user-input"
+              placeholder="Gib eine Stadt ein" />
+            <button class="input-reset-btn">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+          </div>
+          <select
+            multiple
+            size="5"
+            name="city-options"
+            id="city-options"></select>
+        </form>
         <section class="current-weather"></section>
         <section class="forcast-weather"></section>
         <section class="forcast-details-page"></section>
       </div>
-      <form>
-        <div class="input-container">
-          <input
-            type="text"
-            name="user-input"
-            id="user-input"
-            placeholder="Gib eine Stadt ein" />
-          <button class="input-reset-btn">
-            <i class="fa-solid fa-circle-xmark"></i>
-          </button>
-        </div>
-        <select
-          multiple
-          size="5"
-          name="city-options"
-          id="city-options"></select>
-      </form>
     </div>
     <script
       src="https://kit.fontawesome.com/dc9a1f8fa8.js"

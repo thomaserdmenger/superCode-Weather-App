@@ -29,7 +29,7 @@ const monthsArr = [
 const daysArr = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa']
 
 // Focus Input Field
-inputField.focus()
+// inputField.focus()
 
 // Event Handler
 const getUserData = (e) => {
@@ -93,7 +93,7 @@ const renderMenu = (cities) => {
       document.querySelector('input[type="text"]').value = ''
       document.querySelector('select').innerHTML = ''
       document.querySelector('select').classList.remove('show')
-      inputField.focus()
+      // inputField.focus()
     }
 
     // Event Listener
@@ -105,7 +105,7 @@ const btnErrorHandling = () => {
   document.querySelector('#user-input').value = ''
   errorBtn.classList.remove('show')
   menuContainer.classList.remove('show')
-  inputField.focus()
+  // inputField.focus()
 }
 
 // Fetch Weather Data from API
@@ -326,7 +326,7 @@ const renderForcastData = (forcastData) => {
           document.querySelector('.current-weather').style.display = 'flex'
           document.querySelector('.forcast-weather').style.display = 'flex'
           form.style.display = 'flex'
-          inputField.focus()
+          // inputField.focus()
         })
       }
     })
