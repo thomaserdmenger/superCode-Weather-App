@@ -221,10 +221,7 @@ form input[type='text'] {
   transition: 0.5s;
   width: 100%;
   cursor: pointer;
-}
-
-form input[type='text']:focus {
-  margin-block-start: 0.7rem;
+  position: relative;
   padding: 1rem;
 }
 
@@ -233,15 +230,11 @@ form input[type='text']::placeholder {
   text-align: center;
 }
 
-.input-container {
-  position: relative;
-}
-
 .input-reset-btn {
   all: unset;
   position: absolute;
-  right: 1rem;
-  top: 1.8rem;
+  right: 3.5rem;
+  top: 1rem;
   cursor: pointer;
   display: none;
 }

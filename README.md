@@ -26,8 +26,4 @@
 
 ## Screenshot-Image
 
-![](./assets/images/screenshot-new.jpg)
-
-## Screenshot-GIF
-
-![](./assets/images/screenshot.gif)
+![](./assets/images/screenshot.png)
