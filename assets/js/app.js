@@ -45,7 +45,7 @@ const getUserData = (e) => {
 
   // Fetch City from API
   fetch(
-    `http://api.openweathermap.org/geo/1.0/direct?q=${userInputVal}&limit=10&appid=${KEY}&units=metric&lang=de`
+    `https://api.openweathermap.org/geo/1.0/direct?q=${userInputVal}&limit=10&appid=${KEY}&units=metric&lang=de`
   )
     .then((res) => res.json())
     .then((cities) => renderMenu(cities))
