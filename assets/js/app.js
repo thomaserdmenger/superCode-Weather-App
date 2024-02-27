@@ -54,32 +54,33 @@ const getUserData = (e) => {
 
 // Render Options Menu
 const renderMenu = (cities) => {
-  document.querySelector('select').innerHTML = ''
+  document.querySelector('#city-options').innerHTML = ''
 
   // Add Button and Event Listener
   errorBtn.classList.add('show')
-
   errorBtn.addEventListener('click', btnErrorHandling)
 
   // Error Handling
   if (cities.length === 0) {
-    const optionEl = document.createElement('option')
-    optionEl.textContent = `Keine Stadt gefunden`
-    optionEl.addEventListener('click', btnErrorHandling)
-    menuContainer.appendChild(optionEl)
+    const menuItem = document.createElement('p')
+    menuItem.classList.add('menu-item')
+    menuItem.textContent = `Keine Stadt gefunden`
+    menuItem.addEventListener('click', btnErrorHandling)
+    menuContainer.appendChild(menuItem)
     return
   }
 
   // Render Content for each Element
   cities.forEach((city) => {
-    const optionEl = document.createElement('option')
+    const menuItem = document.createElement('p')
+    menuItem.classList.add('menu-item')
 
-    optionEl.textContent = `${city.name} ${city.state ? '|' : ''} ${
+    menuItem.textContent = `${city.name} ${city.state ? '|' : ''} ${
       city.state ? city.state : ''
     } | ${city.country}`
 
     menuContainer.classList.add('show')
-    menuContainer.appendChild(optionEl)
+    menuContainer.appendChild(menuItem)
 
     // Event Handler
     const getLatLong = () => {
@@ -91,13 +92,12 @@ const renderMenu = (cities) => {
       fetchWeatherData(lat, lon, name)
       fetchForcastData(lat, lon)
       document.querySelector('input[type="text"]').value = ''
-      document.querySelector('select').innerHTML = ''
-      document.querySelector('select').classList.remove('show')
-      // inputField.focus()
+      document.querySelector('#city-options').innerHTML = ''
+      document.querySelector('#city-options').classList.remove('show')
     }
 
     // Event Listener
-    optionEl.addEventListener('click', getLatLong)
+    menuItem.addEventListener('click', getLatLong)
   })
 }
 
@@ -105,7 +105,6 @@ const btnErrorHandling = () => {
   document.querySelector('#user-input').value = ''
   errorBtn.classList.remove('show')
   menuContainer.classList.remove('show')
-  // inputField.focus()
 }
 
 // Fetch Weather Data from API

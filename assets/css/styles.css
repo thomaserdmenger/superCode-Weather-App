@@ -248,7 +248,7 @@ form input[type='text']::placeholder {
   font-size: 1.5rem;
 }
 
-form select {
+form #city-options {
   background-color: var(--color-black-trans);
   border-radius: var(--border-radius);
   border: none;
@@ -257,25 +257,25 @@ form select {
   display: none;
   margin-block-end: 1rem;
   outline: none;
-  padding-inline: 0.5rem;
+  padding: 1rem;
   transition: all 0.5s;
   width: 80%;
 }
 
-form select.show {
+form #city-options.show {
   border: none;
   transition: 1s;
   position: absolute;
   top: 4.5rem;
+  display: flex;
+  flex-direction: column;
 }
 
-form select option {
+form #city-options option {
   margin-block: 0.5rem;
   cursor: pointer;
 }
 
-form select.show {
-  display: flex;
-  flex-direction: column;
-  height: 160px;
+form .menu-item {
+  margin-block: 0.5rem;
 }
