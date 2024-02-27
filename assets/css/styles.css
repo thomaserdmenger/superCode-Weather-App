@@ -271,11 +271,7 @@ form #city-options.show {
   flex-direction: column;
 }
 
-form #city-options option {
-  margin-block: 0.5rem;
-  cursor: pointer;
-}
-
 form .menu-item {
   margin-block: 0.5rem;
+  cursor: pointer;
 }
